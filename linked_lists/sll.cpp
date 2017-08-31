@@ -20,8 +20,16 @@ class list{
     void display();
     void findNode(int data);
     void findRemove(int data);            //Take example of a list li1= 10->20->30
+    ~list();
 };
-
+list::~list(){                            //De-allocating the linked list memory nodes from memory during exit call
+  while(head!=NULL){
+    node *temp=head;
+    head=head->next;
+    delete temp;
+  }
+  cout<<"List deleted"<<endl;
+}
 void list::insertFront(int data){         //Insert '40' to the front of li1 like 40->10->20->30
   node *temp= new node;
     temp->data=data;                      //Obtain the value in a temp node and point it to the previous head, then initialize it as
@@ -170,6 +178,7 @@ int main()
                 li.findRemove(data);
                 break;
       case 8:
+                li.~list();
                 exit(0);
       default: cout<<"Enter the correct option"<<endl;
     }
