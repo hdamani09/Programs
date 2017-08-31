@@ -21,10 +21,8 @@ int main()
   }
   if(size==1)                                     //Calculate the determinant for different matrix sizes, generally for matrix 1X1 and 2X2
     deter=a[0][0];                                //we find the determinant in different ways than in 3X3 and above
-  else if(size==2){
-    for(i=0;i<size;i++)
+  else if(size==2)
       deter = (a[0][0]*a[1][1]) - (a[0][1]*a[1][0]);
-  }
   else{
     for(i=0;i<size;i++){
       deter +=(a[0][i]*((a[1][(i+1)%3]*a[2][(i+2)%3]) - (a[1][(i+2)%3]*a[2][(i+1)%3])));
