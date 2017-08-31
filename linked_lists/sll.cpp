@@ -13,13 +13,14 @@ class list{
     list(){             //to define them
       head=NULL;
     }
-    void insertFront(int data);
-    void insertEnd(int data);
+    void insertFront(int);
+    void insertEnd(int);
     void removeFront();
     void removeEnd();
     void display();
-    void findNode(int data);
-    void findRemove(int data);            //Take example of a list li1= 10->20->30
+    void findNode(int);
+    void findRemove(int);            //Take example of a list li1= 10->20->30
+    void replaceNode(int,int);
     ~list();
 };
 list::~list(){                            //De-allocating the linked list memory nodes from memory during exit call
@@ -60,7 +61,7 @@ void list::removeFront(){                //Remove the frontmost element of li1 m
     node *temp;                          //If list isn't empty set the head node to temp, and move the head pointer to next and delete
     temp=head;                           //the temp node
     head=head->next;
-    delete temp;
+    delete temp;                         //Finally delete the node using 'delete *node'
   }
   else
     cout<<"No nodes to delete"<<endl;   //Else list is empty
@@ -88,17 +89,25 @@ void list::removeEnd(){                  //Remove the last element of li1 making
 
 void list::display(){                   // Traverse the list li1 to display 10->20->30
   node *temp= head;
-  cout<< "\n[head] ";
-  while(temp!=NULL){                    //Initializing head as temp, traverse and display the data of every node until the last node
-    cout<<"=> "<< temp->data;           //is reached
-    temp= temp->next;
+  if (head==NULL)
+    cout<<"List is empty"<<endl;
+  else{
+    cout<< "\n[head] ";
+    while(temp!=NULL){                    //Initializing head as temp, traverse and display the data of every node until the last node
+      cout<<"=> "<< temp->data;           //is reached
+      temp= temp->next;
+    }
+    cout<<"=> [null]"<<endl;
   }
-  cout<<"=> [null]"<<endl;
 }
 
 void list::findNode(int data){          // Traverse the list li1 to find an element for eg.'20', set the flag if found and print the
   node *temp= head;                     // appropriate message and position of the element if found
   int pos=0,flag=0;
+  if(head==NULL){
+    cout<<"List is empty"<<endl;
+    return;
+  }
   while(temp!=NULL){
     if(temp->data==data){
       cout<<"Element "<<data<<" found at index-position: "<<pos<<endl;
@@ -110,10 +119,33 @@ void list::findNode(int data){          // Traverse the list li1 to find an elem
     if(flag==0)
     cout<<"Element not found"<<endl;
 }
+
+void list::replaceNode(int data,int data2){        // Traverse the list li1 to find an element for eg.'20', set the flag if found and print the
+  node *temp= head;                               // appropriate message and replace with the newdata
+  int pos=0,flag=0;
+  if(head==NULL){
+    cout<<"List is empty"<<endl;
+    return;
+  }
+  while(temp!=NULL){
+    if(temp->data==data){
+      cout<<"Element "<<data<<" found at index-position: "<<pos<<endl;
+      temp->data=data2;
+      flag=1;
+    }
+    temp=temp->next;
+    pos++;
+  }
+    if(flag==0)
+    cout<<"Element not found"<<endl;
+    else
+    cout<<"Element replaced"<<endl;
+}
+
 void list::findRemove(int data){        // Traverse the list li1 to find an element for eg.'20' to delete it, set the flag if found
     int flag=0,pos=0;                   // and delete the node, else don't and print the appropriate message
     node *cur=head,*temp=head;
-    while(temp!=NULL){
+    while(temp->next!=NULL){
     if(temp->data==data){
       flag=1;
       cout<<"Element "<<data<<" found and deleted at index-position: "<<pos<<endl;
@@ -135,14 +167,15 @@ void list::findRemove(int data){        // Traverse the list li1 to find an elem
       head=head->next;                        //move the head pointer to the next node, breaking its link
     else                                      //Else if element is foundat head(first)position and it's the only node present in the list
       head=NULL;                              // remove the node by setting the head to NULL
+      delete temp;                            //Finally delete the node using 'delete *node'
   }
-    delete temp;                               //Finally delete the node using 'delete *node'
+
 }
 int main()
 {
   list li;
-  int option,data;
-  cout<< "Enter \n1.To insert to front\n2.To insert to end\n3.To remove front node\n4.To remove end node\n5.To display the linked list\n6.To find an element\n7.To find and remove\n8.Exit"<<endl;
+  int option,data,data2;
+  cout<< "Enter \n1.To insert to front\n2.To insert to end\n3.To remove front node\n4.To remove end node\n5.To display the linked list\n6.To find an element\n7.To find and remove\n8.To find and replce\n9.Exit"<<endl;
   while(1){
     cout<<"Enter the option no: ";
     cin>>option;
@@ -178,6 +211,13 @@ int main()
                 li.findRemove(data);
                 break;
       case 8:
+                cout<<"Enter the data to find: ";
+                cin>>data;
+                cout<<"\nEnter what to replace it with: ";
+                cin>>data2;
+                li.replaceNode(data,data2);
+                break;
+      case 9:
                 li.~list();
                 exit(0);
       default: cout<<"Enter the correct option"<<endl;
