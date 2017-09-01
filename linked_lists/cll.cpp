@@ -38,7 +38,7 @@ list::~list(){                  //De-allocating the linked list memory nodes fro
     cout<<"List deleted"<<endl;
 }
 
-void list::insertNew(int data){                //Insert '40' to the front of li1 like 40->10->20->30
+void list::insertNew(int data){
     node *temp=new node;
     temp->data=data;
     if(head==NULL){                           //If list is empty obtain the value in a temp node and point it to itself
@@ -55,7 +55,7 @@ void list::insertNew(int data){                //Insert '40' to the front of li1
     head=temp;                               //initialize the temp as the new head
 }
 void list::removeNew(){
-  node *temp=head;                           //Remove the frontmost element of li1 making the list as 10->20->30->50
+  node *temp=head;                           //Remove the frontmost element of li1
   if(head==NULL){
     cout<<"List is empty"<<endl;             //If list is empty, print the appropriate message
     return;
@@ -72,7 +72,7 @@ void list::removeNew(){
   delete temp;                              //Finally delete the node using 'delete *node'
 
 }
-void list::display(){                   // Traverse the list li1 to display 10->20->30
+void list::display(){                   // Traverse the list li1 to display
   node *temp= head;
   if(head==NULL){                       // If head is NULL, means list is empty and return to main
     cout<<"List is empty"<<endl;
@@ -92,7 +92,7 @@ void list::display(){                   // Traverse the list li1 to display 10->
   cout<<"=> [head]"<<endl;
 }
 
-void list::findNode(int data){          // Traverse the list li1 to find an element for eg.'20', set the flag if found and print the
+void list::findNode(int data){          // Traverse the list li1 to find an element, set the flag if found and print the
   node *temp= head;                     // appropriate message and position of the element if found
   int pos=0,flag=0;
   if(head==NULL){
@@ -115,7 +115,7 @@ void list::findNode(int data){          // Traverse the list li1 to find an elem
   cout<<"Element not found"<<endl;
 }
 
-void list::replaceNode(int data,int data2){          // Traverse the list li1 to find an element for eg.'20', set the flag if found and print the
+void list::replaceNode(int data,int data2){          // Traverse the list li1 to find an element , set the flag if found and print the
   node *temp= head;                               // appropriate message and replace with the newdata
   int pos=0,flag=0;
   if(head==NULL){
@@ -142,7 +142,7 @@ void list::replaceNode(int data,int data2){          // Traverse the list li1 to
     cout<<"Element replaced"<<endl;
 }
 
-void list::findRemove(int data){        // Traverse the list li1 to find an element for eg.'20' to delete it, s
+void list::findRemove(int data){        // Traverse the list li1 to find an element to delete it, s
     int flag=0,flag2=0,pos=0;
     node *temp=head;
     while(temp->next!=head){
@@ -169,7 +169,7 @@ void list::findRemove(int data){        // Traverse the list li1 to find an elem
         }
           cur->next=temp->next;
       }
-      else if(temp==head && head->next!=head)   //If element is found at head(first) position and there's consecutive node(s), then simply
+      else if(temp==head && head->next!=head)   //If element is found at head (first) position and there's consecutive node(s), then simply
       {
         head=head->next;                        //move the head pointer to the next node, breaking its link
         node *cur=head;                         //then traverse to the last element of the list using cur node and point cur's next to the
@@ -190,8 +190,9 @@ int main()
   int option,data,data2;
   cout<< "Enter \n1.To insert a node\n2.To remove a node\n3.To display the linked list\n4.To find an element\n5.To find and remove\n6.To find and replace\n7.Exit"<<endl;
   while(1){
-    cout<<"Enter the option no: ";
+    cout<<"\nEnter the option no: ";
     cin>>option;
+    cout<<endl;
     switch(option){
       case 1:
                 cout<<"Enter the data: ";
