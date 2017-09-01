@@ -177,8 +177,9 @@ int main()
   int option,data,data2;
   cout<< "Enter \n1.To insert to front\n2.To insert to end\n3.To remove front node\n4.To remove end node\n5.To display the linked list\n6.To find an element\n7.To find and remove\n8.To find and replce\n9.Exit"<<endl;
   while(1){
-    cout<<"Enter the option no: ";
+    cout<<"\nEnter the option no: ";
     cin>>option;
+    cout<<endl;
     switch(option){
       case 1:
                 cout<<"Enter the data: ";
